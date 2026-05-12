@@ -112,6 +112,11 @@ export default function ProfileScreen({onLogout, onGoToUsers }: ProfileScreenPro
         )
     }
 
+    async function handleLogout() {
+        await clearTokens();
+        onLogout();
+    }
+
     if (!user) {
         return (
             <View style={styles.loadingContainer}>
@@ -215,7 +220,7 @@ export default function ProfileScreen({onLogout, onGoToUsers }: ProfileScreenPro
 
                         <TouchableOpacity
                             style={styles.secondaryButton}
-                            onPress={onLogout}
+                            onPress={handleLogout}
                         >
                             <Text style={styles.secondaryText}>Logout</Text>
                         </TouchableOpacity>

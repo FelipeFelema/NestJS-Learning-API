@@ -1,8 +1,10 @@
 import axios from "axios";
 import { clearTokens, getAccessToken, getRefreshToken, saveTokens } from "../storage/authStorage";
 
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL;
+
 const api = axios.create({
-    baseURL: "http://192.168.0.100:3000/api/v1",
+    baseURL: API_BASE_URL,
     headers: {
         "Content-Type": "application/json",
     }
@@ -33,7 +35,7 @@ api.interceptors.response.use(
                 const refreshToken = await getRefreshToken();
 
                 const response = await axios.post(
-                    "http://192.168.0.100:3000/api/v1/auth/refresh",
+                    `${API_BASE_URL}/auth/refresh`,
                     { refreshToken }
                 );
 
